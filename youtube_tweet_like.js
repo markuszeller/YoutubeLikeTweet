@@ -3,13 +3,12 @@
 // @namespace   markuszeller.com
 // @description Share on Twitter when you dislike a video on Youtube
 // @include     https://www.youtube.com/*
-// @version     0.2
+// @version     0.3
 // @grant       none
 // @author      Markus Zeller - @n4cer on Twitter
 // @downloadURL https://github.com/markuszeller/YoutubeLikeTweet/youtube_tweet_like.js
 // @updateURL   https://github.com/markuszeller/YoutubeLikeTweet/youtube_tweet_like.js
 // ==/UserScript==
-
 
 "use strict";
 
@@ -21,13 +20,14 @@
 
 // Placeholder for Youtube-URL: %URL%
 // Placeholder for Video-Title: %TITLE%
-
 const LikeText = "Ich mag das @YouTube-Video: %URL% %TITLE%";
 const DislikeText = "Ich finde das @YouTube-Video scheiße: %URL% %TITLE%";
 
 // Like and Dislike will get a style for border-bottom when ready to use
-
 const borderStyle = "2px solid darkgreen";
+
+// Keep only video ID and timestamp parameters
+const cleanURL = true;
 
 /////////////////////////////////////////////////////////////////////
 // PROGRAM START
@@ -75,7 +75,7 @@ function share(template)
     }
 
     var title = titleElement.textContent;
-    template = template.replace('%URL%', document.location.href);
+    template = template.replace('%URL%', getCleanURL());
     template = template.replace('%TITLE%', title);
 
     var sharerUrl = twitterUrl;
@@ -93,4 +93,26 @@ function share(template)
         return;
     }
     shareTrigger.click();
+}
+
+function keepFilter(segment)
+{
+    let [key, value] = segment.split("=");
+    let cleanKey = key.replace("?", "");
+    return (cleanKey === "v" || cleanKey === "t");
+}
+
+function getCleanURL()
+{
+    let url = document.createElement("a");
+    url.href = document.location.href;
+    if(!cleanURL) return url;
+
+    let segments = url.search.split("&");
+    if(!segments) return url;
+
+    segments = segments.filter(keepFilter);
+    url.search = segments.join("&");
+
+    return url;
 }
