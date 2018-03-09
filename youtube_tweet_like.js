@@ -3,7 +3,7 @@
 // @namespace   markuszeller.com
 // @description Share on Twitter when you dislike a video on Youtube
 // @include     https://www.youtube.com/*
-// @version     0.3
+// @version     0.4
 // @grant       none
 // @author      Markus Zeller - @n4cer on Twitter
 // @downloadURL https://github.com/markuszeller/YoutubeLikeTweet/youtube_tweet_like.js
@@ -38,7 +38,7 @@ const twitterUrl = "https://twitter.com/intent/tweet?text=%TEXT%";
 var likeButtons = [];
 
 const getButtons = function () {
-    likeButtons = document.querySelectorAll("#top-level-buttons button");
+    likeButtons = document.querySelectorAll("#info button");
     if (!likeButtons.length)
     {
         window.setTimeout(getButtons, 1000);
