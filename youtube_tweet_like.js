@@ -6,8 +6,8 @@
 // @version     0.5
 // @grant       none
 // @author      Markus Zeller - @n4cer on Twitter
-// @downloadURL https://github.com/markuszeller/YoutubeLikeTweet/youtube_tweet_like.js
-// @updateURL   https://github.com/markuszeller/YoutubeLikeTweet/youtube_tweet_like.js
+// @downloadURL https://raw.githubusercontent.com/markuszeller/YoutubeLikeTweet/master/youtube_tweet_like.js
+// @updateURL   https://raw.githubusercontent.com/markuszeller/YoutubeLikeTweet/master/youtube_tweet_like.js
 // ==/UserScript==
 
 (() => {
